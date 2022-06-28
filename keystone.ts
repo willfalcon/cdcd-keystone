@@ -40,7 +40,7 @@ export default config({
   server: {
     port: PORT,
     cors: {
-      origin: ["http://localhost:3000", "cdcd.creativedistillery.com"],
+      origin: ["cdcd.creativedistillery.com"],
       credentials: true
     }
   },
