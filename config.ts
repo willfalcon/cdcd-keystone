@@ -1,6 +1,6 @@
 // 3000 is standard for node apps
 // Once deployed, Heroku will supply this var to your app
-export const PORT = parseInt(process.env.PORT) || 3000;
+export const PORT = parseInt(process.env.PORT) || 4000;
 
 // Postgres DB URL
 // The default value here will work if you've installed Postgres on MacOS using brew

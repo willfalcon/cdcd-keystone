@@ -11,16 +11,14 @@ generator client {
   output   = "node_modules/.prisma/client"
 }
 
-model Task {
-  id           String    @id @default(cuid())
-  label        String    @default("")
-  priority     String?
-  isComplete   Boolean   @default(false)
-  assignedTo   Person?   @relation("Task_assignedTo", fields: [assignedToId], references: [id])
-  assignedToId String?   @map("assignedTo")
-  finishBy     DateTime?
-
-  @@index([assignedToId])
+model Site {
+  id              String @id @default(cuid())
+  title           String @default("")
+  url             String @default("")
+  frontendUrl     String @default("")
+  flagTime        Int?
+  postTypes       Json?
+  updatePostTypes Json?
 }
 
 model Person {
@@ -28,5 +26,4 @@ model Person {
   name     String  @default("")
   email    String  @unique @default("")
   password String?
-  tasks    Task[]  @relation("Task_assignedTo")
 }

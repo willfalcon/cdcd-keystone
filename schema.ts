@@ -2,24 +2,34 @@
 // See.. https://github.com/keystonejs/keystone/tree/master/examples/with-auth
 
 import { list } from '@keystone-6/core';
-import { checkbox, password, relationship, text, timestamp, select } from '@keystone-6/core/fields';
+import { checkbox, password, relationship, text, timestamp, select, integer, json } from '@keystone-6/core/fields';
 
 export const lists = {
-  Task: list({
+  // Task: list({
+  //   fields: {
+  //     label: text({ isRequired: true }),
+  //     priority: select({
+  //       dataType: 'enum',
+  //       options: [
+  //         { label: 'Low', value: 'low' },
+  //         { label: 'Medium', value: 'medium' },
+  //         { label: 'High', value: 'high' },
+  //       ],
+  //     }),
+  //     isComplete: checkbox(),
+  //     assignedTo: relationship({ ref: 'Person.tasks', many: false }),
+  //     finishBy: timestamp(),
+  //   },
+  // }),
+  Site: list({
     fields: {
-      label: text({ isRequired: true }),
-      priority: select({
-        dataType: 'enum',
-        options: [
-          { label: 'Low', value: 'low' },
-          { label: 'Medium', value: 'medium' },
-          { label: 'High', value: 'high' },
-        ],
-      }),
-      isComplete: checkbox(),
-      assignedTo: relationship({ ref: 'Person.tasks', many: false }),
-      finishBy: timestamp(),
-    },
+      title: text({ isRequired: true }),
+      url: text({isRequired: true}),
+      frontendUrl: text(),
+      flagTime: integer(),
+      postTypes: json(),
+      updatePostTypes: json()
+    }
   }),
   Person: list({
     fields: {
@@ -32,7 +42,7 @@ export const lists = {
       // we want to ensure that all people have a password set, so we use
       // the isRequired flag.
       password: password({ isRequired: true }),
-      tasks: relationship({ ref: 'Task.assignedTo', many: true }),
+      // tasks: relationship({ ref: 'Task.assignedTo', many: true }),
     },
   }),
 };

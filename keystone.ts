@@ -6,7 +6,7 @@ import { statelessSessions } from '@keystone-6/core/session';
 import { createAuth } from '@keystone-6/auth';
 import { lists } from './schema';
 import { PORT, DATABASE_URL, SESSION_MAX_AGE, SESSION_SECRET } from './config';
-
+import {extendGraphqlSchema} from './queries';
 // createAuth configures signin functionality based on the config below. Note this only implements
 // authentication, i.e signing in as an item using identity and secret fields in a list. Session
 // management and access control are controlled independently in the main keystone config.
@@ -36,16 +36,21 @@ const session = statelessSessions({
 
 // We wrap our config using the withAuth function. This will inject all
 // the extra config required to add support for authentication in our system.
-export default withAuth(
-  config({
-    db: {
-      provider: 'postgresql',
-      useMigrations: true,
-      url: DATABASE_URL,
-    },
-    server: { port: PORT },
-    lists,
-    // We add our session configuration to the system here.
-    session,
-  })
-);
+export default config({
+  server: {
+    port: PORT,
+    cors: {
+      origin: ["http://localhost:3000", "cdcd.creativedistillery.com"],
+      credentials: true
+    }
+  },
+  db: {
+    provider: 'postgresql',
+    useMigrations: true,
+    url: DATABASE_URL,
+  },
+  lists,
+  extendGraphqlSchema
+  // We add our session configuration to the system here.
+  // session,
+});
