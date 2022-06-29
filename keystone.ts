@@ -37,19 +37,19 @@ const session = statelessSessions({
 // We wrap our config using the withAuth function. This will inject all
 // the extra config required to add support for authentication in our system.
 export default config({
-  server: {
-    port: PORT,
-    cors: {
-      origin: ["cdcd.creativedistillery.com"],
-      credentials: true
-    }
-  },
+  lists,
   db: {
     provider: 'postgresql',
     useMigrations: true,
     url: DATABASE_URL,
   },
-  lists,
+  server: {
+    port: PORT,
+    cors: {
+      origin: ["https://cdcd.creativedistillery.com"],
+      credentials: true
+    }
+  },
   extendGraphqlSchema
   // We add our session configuration to the system here.
   // session,
