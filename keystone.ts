@@ -41,7 +41,7 @@ export default config({
   lists,
   db: {
     provider: 'postgresql',
-    // useMigrations: true,
+    useMigrations: true,
     url: DATABASE_URL,
   },
   server: {
